@@ -1,0 +1,68 @@
+---
+title: "Investigation of Different Causes of Infant Mortality in the United States"
+author: "Jonathan Kanyinda"
+date: "03/13/2021"
+output: github_document
+---
+
+## Abstract
+
+Infant mortality in the United States is one of the less discussed topics in general. However, it affects a lot of families and communities in the country. In this report, infant mortality based on the data from the year 2018 by age, maternal race, gestational age and maternal state of residence have been investigated. Descriptive tabulations as well as graphs are reported and interpreted for infant death mortality using the 2018 period linked birth/infant datafile that is based on birth and death certificates registered in all states and the district of Columbia. More than 20,000 infant deaths were reported in 2018. The infant mortality rate declined by 4 % in comparison to 2017, and regardless of the differences investigated, in general the mortality rate has been trending down since 1995. I will do an exploratory analysis to investigate the relation between race, gestational age and state of residence with infant mortality
+
+## Introduction
+
+
+
+## Methods 
+
+In this analysis the data was obtained from public data files of the Center for Desease Control and Privation's National Center for Health Statistic at :https://www.cdc.gov/nchs/data_access/vitalstatsonline.htm#Period_Linked and the select data was from 2017/2018 year as a Ziped file that was decompressed/expanded into the computer and there was a user guide provided that was used to collect the information of interrest. The first step was to obtain the files that were ziped in order to be able to explore them. After obtaining the file, the information was encoded as a "fixed width function" file and therefore I needed to use the fwf function, which is a function in the tidy verse package and I was introduced to the function through a walk through at https://readr.tidyverse.org/reference/read_fwf.html. Next, the user guide helped to figure out which set rows contained specific information in order to be able to retrieve that information using the fwf function in R
+
+LOAD PACKAGES
+
+```{r}
+library(tidyverse)          # Load the tidyverse package
+
+```
+
+
+## REsults
+
+Table 1
+
+```{r}
+table1 <- read_fwf("Data/Nat2018PublicUS.c20190509.r20190717.txt",
+         col_positions = fwf_cols(birth_year = c(9,12), 
+                                  month_of_birth = c(13,14),
+                                  day_of_birth = c(23),
+                                  age_of_mother = c(75,76),
+                                  race_of_mother = c(107),
+                                  place_of_birth = c(32),
+                                  
+                                  marital_status = c(120),
+                                  mother_education_level = c(124),
+                                  father_education_level = c(163)
+                                 
+                              
+                            
+                                   ))
+
+
+ table1  # print table1 (table containig all data that will be  explored in the data analysis)
+
+```
+
+                                 
+
+
+
+## Discussion
+
+
+## References
+
+
+
+
+
+
+
