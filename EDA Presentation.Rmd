@@ -7,7 +7,11 @@ output: github_document
 
 ## Abstract
 
+
+
 Infant mortality in the United States is one of the less discussed topics in general. However, it affects a lot of families and communities in the country. In this report, infant mortality based on the data from the year 2018 by age, maternal race, gestational age and maternal state of residence have been investigated. Descriptive tabulations as well as graphs are reported and interpreted for infant death mortality using the 2018 period linked birth/infant datafile that is based on birth and death certificates registered in all states and the district of Columbia. More than 20,000 infant deaths were reported in 2018. The infant mortality rate declined by 4 % in comparison to 2017, and regardless of the differences investigated, in general the mortality rate has been trending down since 1995. I will do an exploratory analysis to investigate the relation between race, gestational age and state of residence with infant mortality
+
+
 
 ## Introduction
 
@@ -15,9 +19,15 @@ Infant mortality in the United States is one of the less discussed topics in gen
 
 ## Methods 
 
-In this analysis the data was obtained from public data files of the Center for Desease Control and Privation's National Center for Health Statistic at :https://www.cdc.gov/nchs/data_access/vitalstatsonline.htm#Period_Linked and the select data was from 2017/2018 year as a Ziped file that was decompressed/expanded into the computer and there was a user guide provided that was used to collect the information of interrest. The first step was to obtain the files that were ziped in order to be able to explore them. After obtaining the file, the information was encoded as a "fixed width function" file and therefore I needed to use the fwf function, which is a function in the tidy verse package and I was introduced to the function through a walk through at https://readr.tidyverse.org/reference/read_fwf.html. Next, the user guide helped to figure out which set rows contained specific information in order to be able to retrieve that information using the fwf function in R
+### Data Acquisition 
 
-LOAD PACKAGES
+In this analysis the data was obtained from public data files of the Center for Desease Control and Privation's National Center for Health Statistic at :https://www.cdc.gov/nchs/data_access/vitalstatsonline.htm#Period_Linked (Data Access - Vital Statistics Online) and the select data was from 2017/2018 year as a Ziped file that was decompressed/expanded into the computer and there was a user guide provided that was used to collect the information of interrest. The first step was to obtain the files that were ziped in order to be able to explore them. After obtaining the file, the information was encoded as a "fixed width function" file and therefore I needed to use the fwf function, which is a function in the tidy verse package and a walk through of the functoin can be faound at https://readr.tidyverse.org/reference/read_fwf.html (Read a Fixed Width File into a Tibble — Read_fwf). Next, the user guide helped to figure out which set rows contained specific information in order to be able to retrieve that information using the fwf function in R. 
+
+### Data Preparation 
+
+The data obtained was a set of numbers displayed in a table (table1) and the user guide provided the correspondence and significance of each number. Therefore to better understand my data, I created a word document in which I recorded the meaning of each number in the different categories and then proceeded to modify the values displayed in the inintial table (table1) using the as factor (as_factor) function combined with teh c (c()) function and then proceeded to print a new table (main_table) 
+
+LOAD PACKAGES                                                                                                        
 
 ```{r}
 library(tidyverse)          # Load the tidyverse package
@@ -30,24 +40,88 @@ library(tidyverse)          # Load the tidyverse package
 Table 1
 
 ```{r}
-table1 <- read_fwf("Data/Nat2018PublicUS.c20190509.r20190717.txt",
-         col_positions = fwf_cols(birth_year = c(9,12), 
-                                  month_of_birth = c(13,14),
-                                  day_of_birth = c(23),
-                                  age_of_mother = c(75,76),
-                                  race_of_mother = c(107),
-                                  place_of_birth = c(32),
-                                  
-                                  marital_status = c(120),
-                                  mother_education_level = c(124),
-                                  father_education_level = c(163)
+table1 <-  read_fwf("Data/Nat2018PublicUS.c20190509.r20190717.txt",
+         col_positions = fwf_cols(year = c(9,12), 
+                                  month = c(13,14),
+                                  day = c(23),
+                                  age = c(75,76),
+                                  race = c(107),
+                                  place = c(32),
+                                  mstatus = c(120),
+                                  meduc = c(124),
+                                  feduc = c(163)
                                  
-                              
-                            
+                                 
                                    ))
 
+table1  # print table1 (table containig all data that will be  explored in the data analysis)
+ 
 
- table1  # print table1 (table containig all data that will be  explored in the data analysis)
+# Clean the data ----------------------------------------------------------
+
+daysofweek <- as_factor(c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
+ 
+daysofweek       # print days of the week
+ 
+races <- as_factor(c("White (only)", "Black (only)", "AIAN (only)", "Asian (only)", "NHOPI (only)", "More than one race"))
+
+races  # print the different races
+
+maritalstatus <- as_factor(c("Married", "Unmarried"))
+
+maritalstatus      # print marital status
+
+birthplace <- as_factor(c("Hospital", "Free standing birth center", "Home (intended)", "Home,unintended0", "home (unknown if intended or unintended", "clinic/doctor's office", "Other","Unknown"))
+
+birthplace      # print birth place
+
+educationlevel <- as_factor(c("8th grade or less", "9th through 12th grade with no diploma", "High School diploma", "Some college credit, no degree", "Associate degree", "Bachelor'sdegree", "Master's degree (MA, MEng, MSW, MBA)", "Doctorate (PhD, EdD) or Professional degree (MD, DDS, DVM, LLB, JD)", "Unknown"))
+
+educationlevel     # print education level
+
+birthmonth <- as_factor(c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"))
+
+birthmonth
+
+main_table <- mutate(
+  table1, 
+  year = as.integer(year) , 
+  month = as.integer(month),
+  day = daysofweek[day],
+  race = races[race],
+  mstatus = maritalstatus[mstatus],
+  place = birthplace[place],
+  meduc = educationlevel[meduc],
+  feduc = educationlevel[feduc],
+  month = birthmonth[month]
+) 
+ 
+main_table
+
+# Histogram  showing the age distribution
+
+fig1 <- ggplot(data = main_table) +
+  geom_bar(mapping = aes(x = age, fill = "#C5351B"))
+          
+          
+fig1 + labs(title = "Distribution of Mother's Age",
+          x = "Age of Mother",
+          y = "Frequency (Number of People)",
+          caption = "(based on data from the CDC's National Center for Health Statistics)"
+          ) 
+
+# Histogram showing the racial distribution
+
+fig2 <- ggplot(data = main_table) +
+  geom_bar(mapping = aes(x = race, fill = "#C5351B"))
+
+fig2 + labs(title = "Distribution of Mother's Race", 
+            x = "Race of Mother",
+            y = "Frequency (Number of People)",
+            caption = "(based on data from the CDC's National Center for Health Statistics)"
+            )
+                              
+                            
 
 ```
 
@@ -58,11 +132,13 @@ table1 <- read_fwf("Data/Nat2018PublicUS.c20190509.r20190717.txt",
 ## Discussion
 
 
-## References
+## Litterature Cited
 
 
+1. National  Center  for  Health  Statistics.  User  guide  to  the  2018  period/2017 cohort linked birth/infant death public use file. 2020. Available     from:     ftp://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/DVS/period-cohort-linked/18PE17CO_linkedUG.pdf.
 
+2. “Data Access - Vital Statistics Online.” National Center for Health Statistics, 2020, www.cdc.gov/nchs/data_access/vitalstatsonline.htm#Period_Linked.
 
-
+3. “Read a Fixed Width File into a Tibble — Read_fwf.” Readr, readr.tidyverse.org/reference/read_fwf.html. Accessed 23 Mar. 2021.
 
 
