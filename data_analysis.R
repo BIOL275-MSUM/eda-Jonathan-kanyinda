@@ -18,7 +18,7 @@ table1 <- read_fwf("Data/Nat2018PublicUS.c20190509.r20190717.txt",
                                   mstatus = c(120),
                                   meduc = c(124),
                                   feduc = c(163)
-                                 
+                                  
                                  
                                    ))
 
@@ -90,9 +90,15 @@ fig2 + labs(title = "Distribution of Mother's Race",
             caption = "(based on data from the CDC's National Center for Health Statistics)"
             )
 
+# Histogram showing the marital status distribution of mothers
 
+fig3 <- ggplot(data = main_table) +
+  geom_bar(mapping = aes(x = mstatus, fill = "#C5351B"))
 
-
+fig3 + labs(tite = "Marital Status of Mother",
+            x = "Marital Status",
+            y= "Frequenct (Number of people)",
+            caption  = "(based on data from the CDC's National Center for Health Statistics")
 
 
 
