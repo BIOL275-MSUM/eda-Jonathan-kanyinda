@@ -32,7 +32,7 @@ Center for Desease Control and Prevention’s National Center for Health
 Statistic at
 :<https://www.cdc.gov/nchs/data_access/vitalstatsonline.htm#Period_Linked>
 (Data Access - Vital Statistics Online 2020) and the selected data was
-from the 2017/2018 year as a Ziped file that was decompressed/expanded
+from the 2017/2018 year as a Zipped file that was decompressed/expanded
 into the computer and there was a user guide provided that was used to
 collect the information of interrest(NCHS 2020). The first step was to
 obtain the files that were ziped in order to be able to explore them.
@@ -55,230 +55,75 @@ proceeded to modify the values displayed in the inintial table (table1)
 using the as\_factor function from the forcats package (Wickham 2020)
 function combined with the combine function (c()) from the base package
 (R Core Team 2020) and then proceeded to print a new table
-(main\_table). I then used the information from the new table
-(main\_table) to create graphs using the ggplot function from the
-ggplot2 package (Wickham 2016)
+(main\_table).
 
-LOAD
-    PACKAGES
-
-``` r
-library(tidyverse)          # Load the tidyverse package
-```
-
-    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
-
-    ## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
-    ## ✓ tibble  3.0.4     ✓ dplyr   1.0.2
-    ## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
-    ## ✓ readr   1.4.0     ✓ forcats 0.5.0
-
-    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-## REsults
+## Results
 
 Table 1
 
-``` r
-table1 <-  read_fwf("Data/Nat2018PublicUS.c20190509.r20190717.txt",
-         col_positions = fwf_cols(year = c(9,12), 
-                                  month = c(13,14),
-                                  day = c(23),
-                                  age = c(75,76),
-                                  race = c(107),
-                                  place = c(32),
-                                  mstatus = c(120),
-                                  meduc = c(124),
-                                  feduc = c(163)
-                                 
-                                 
-                                   ))
-```
-
-    ## 
-    ## ── Column specification ────────────────────────────────────────────────────────
-    ## cols(
-    ##   year = col_double(),
-    ##   month = col_character(),
-    ##   day = col_double(),
-    ##   age = col_double(),
-    ##   race = col_double(),
-    ##   place = col_double(),
-    ##   mstatus = col_double(),
-    ##   meduc = col_double(),
-    ##   feduc = col_double()
-    ## )
-
-``` r
-table1  # print table1 (table containig all data that will be  explored in the data analysis)
-```
-
-    ## # A tibble: 3,801,534 x 9
-    ##     year month   day   age  race place mstatus meduc feduc
-    ##    <dbl> <chr> <dbl> <dbl> <dbl> <dbl>   <dbl> <dbl> <dbl>
-    ##  1  2018 01        2    30     1     1       1     6     3
-    ##  2  2018 01        2    35     3     1       2     9     4
-    ##  3  2018 01        2    28     1     1       1     6     4
-    ##  4  2018 01        2    23     3     1       2     2     2
-    ##  5  2018 01        3    37     1     1       1     4     3
-    ##  6  2018 01        2    26     1     2       1     6     6
-    ##  7  2018 01        3    28     1     1       1     4     6
-    ##  8  2018 01        4    31     1     1       1     3     7
-    ##  9  2018 01        5    37     1     1       1     2     4
-    ## 10  2018 01        6    26     1     1       1     7     6
+    ## # A tibble: 3,801,534 x 10
+    ##     year month   day   age  race place mstatus meduc feduc weight
+    ##    <dbl> <chr> <dbl> <dbl> <dbl> <dbl>   <dbl> <dbl> <dbl> <chr> 
+    ##  1  2018 01        2    30     1     1       1     6     3 08    
+    ##  2  2018 01        2    35     3     1       2     9     4 07    
+    ##  3  2018 01        2    28     1     1       1     6     4 07    
+    ##  4  2018 01        2    23     3     1       2     2     2 07    
+    ##  5  2018 01        3    37     1     1       1     4     3 05    
+    ##  6  2018 01        2    26     1     2       1     6     6 09    
+    ##  7  2018 01        3    28     1     1       1     4     6 07    
+    ##  8  2018 01        4    31     1     1       1     3     7 07    
+    ##  9  2018 01        5    37     1     1       1     2     4 08    
+    ## 10  2018 01        6    26     1     1       1     7     6 07    
     ## # … with 3,801,524 more rows
-
-``` r
-# Clean the data ----------------------------------------------------------
-
-daysofweek <- as_factor(c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
- 
-daysofweek       # print days of the week
-```
 
     ## [1] Sunday    Monday    Tuesday   Wednesday Thursday  Friday    Saturday 
     ## Levels: Sunday Monday Tuesday Wednesday Thursday Friday Saturday
 
-``` r
-races <- as_factor(c("White (only)", "Black (only)", "AIAN (only)", "Asian (only)", "NHOPI (only)", "More than one race"))
-
-races  # print the different races
-```
-
     ## [1] White (only)       Black (only)       AIAN (only)        Asian (only)      
-    ## [5] NHOPI (only)       More than one race
+    ## [5] NHOPI              More than one race
     ## 6 Levels: White (only) Black (only) AIAN (only) Asian (only) ... More than one race
-
-``` r
-maritalstatus <- as_factor(c("Married", "Unmarried"))
-
-maritalstatus      # print marital status
-```
 
     ## [1] Married   Unmarried
     ## Levels: Married Unmarried
 
-``` r
-birthplace <- as_factor(c("Hospital", "Free standing birth center", "Home (intended)", "Home,unintended0", "home (unknown if intended or unintended", "clinic/doctor's office", "Other","Unknown"))
-
-birthplace      # print birth place
-```
-
-    ## [1] Hospital                               
-    ## [2] Free standing birth center             
-    ## [3] Home (intended)                        
-    ## [4] Home,unintended0                       
-    ## [5] home (unknown if intended or unintended
-    ## [6] clinic/doctor's office                 
-    ## [7] Other                                  
-    ## [8] Unknown                                
+    ## [1] Hospital                   Free standing birth center
+    ## [3] Home (intended)            Home,unintended0          
+    ## [5] Home (unknown)             clinic/doctor's office    
+    ## [7] Other                      Unknown                   
     ## 8 Levels: Hospital Free standing birth center ... Unknown
 
-``` r
-educationlevel <- as_factor(c("8th grade or less", "9th through 12th grade with no diploma", "High School diploma", "Some college credit, no degree", "Associate degree", "Bachelor'sdegree", "Master's degree (MA, MEng, MSW, MBA)", "Doctorate (PhD, EdD) or Professional degree (MD, DDS, DVM, LLB, JD)", "Unknown"))
-
-educationlevel     # print education level
-```
-
-    ## [1] 8th grade or less                                                  
-    ## [2] 9th through 12th grade with no diploma                             
-    ## [3] High School diploma                                                
-    ## [4] Some college credit, no degree                                     
-    ## [5] Associate degree                                                   
-    ## [6] Bachelor'sdegree                                                   
-    ## [7] Master's degree (MA, MEng, MSW, MBA)                               
-    ## [8] Doctorate (PhD, EdD) or Professional degree (MD, DDS, DVM, LLB, JD)
-    ## [9] Unknown                                                            
-    ## 9 Levels: 8th grade or less ... Unknown
-
-``` r
-birthmonth <- as_factor(c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"))
-
-birthmonth
-```
+    ## [1] 1st-8th grade             9th-12th grade/no diploma
+    ## [3] HS diploma                college credit/no degree 
+    ## [5] A.degree                  Bachelor's degree        
+    ## [7] Master's degree           Doctorate                
+    ## [9] Unknown                  
+    ## 9 Levels: 1st-8th grade 9th-12th grade/no diploma ... Unknown
 
     ##  [1] January   February  March     April     May       June      July     
     ##  [8] August    September October   November  December 
     ## 12 Levels: January February March April May June July August ... December
 
-``` r
-main_table <- mutate(
-  table1, 
-  year = as.integer(year) , 
-  month = as.integer(month),
-  day = daysofweek[day],
-  race = races[race],
-  mstatus = maritalstatus[mstatus],
-  place = birthplace[place],
-  meduc = educationlevel[meduc],
-  feduc = educationlevel[feduc],
-  month = birthmonth[month]
-) 
- 
-main_table
-```
+    ##  [1] 227-449    500-749    750-999    1000-1249  1250,1499  1500,1999 
+    ##  [7] 2000-2499  2500-2999  3000-3499  3500-3999  4000-4499  4500-4999 
+    ## [13] 5000-8167  Not Stated
+    ## 14 Levels: 227-449 500-749 750-999 1000-1249 1250,1499 1500,1999 ... Not Stated
 
-    ## # A tibble: 3,801,534 x 9
-    ##     year month  day      age race    place     mstatus meduc        feduc       
-    ##    <int> <fct>  <fct>  <dbl> <fct>   <fct>     <fct>   <fct>        <fct>       
-    ##  1  2018 Janua… Monday    30 White … Hospital  Married Bachelor'sd… High School…
-    ##  2  2018 Janua… Monday    35 AIAN (… Hospital  Unmarr… Unknown      Some colleg…
-    ##  3  2018 Janua… Monday    28 White … Hospital  Married Bachelor'sd… Some colleg…
-    ##  4  2018 Janua… Monday    23 AIAN (… Hospital  Unmarr… 9th through… 9th through…
-    ##  5  2018 Janua… Tuesd…    37 White … Hospital  Married Some colleg… High School…
-    ##  6  2018 Janua… Monday    26 White … Free sta… Married Bachelor'sd… Bachelor'sd…
-    ##  7  2018 Janua… Tuesd…    28 White … Hospital  Married Some colleg… Bachelor'sd…
-    ##  8  2018 Janua… Wedne…    31 White … Hospital  Married High School… Master's de…
-    ##  9  2018 Janua… Thurs…    37 White … Hospital  Married 9th through… Some colleg…
-    ## 10  2018 Janua… Friday    26 White … Hospital  Married Master's de… Bachelor'sd…
+    ## # A tibble: 3,801,534 x 10
+    ##     year month  day      age race    place     mstatus  meduc    feduc    weight
+    ##    <int> <fct>  <fct>  <dbl> <fct>   <fct>     <fct>    <fct>    <fct>    <fct> 
+    ##  1  2018 Janua… Monday    30 White … Hospital  Married  Bachelo… HS dipl… 2500-…
+    ##  2  2018 Janua… Monday    35 AIAN (… Hospital  Unmarri… Unknown  college… 2000-…
+    ##  3  2018 Janua… Monday    28 White … Hospital  Married  Bachelo… college… 2000-…
+    ##  4  2018 Janua… Monday    23 AIAN (… Hospital  Unmarri… 9th-12t… 9th-12t… 2000-…
+    ##  5  2018 Janua… Tuesd…    37 White … Hospital  Married  college… HS dipl… 1250,…
+    ##  6  2018 Janua… Monday    26 White … Free sta… Married  Bachelo… Bachelo… 3000-…
+    ##  7  2018 Janua… Tuesd…    28 White … Hospital  Married  college… Bachelo… 2000-…
+    ##  8  2018 Janua… Wedne…    31 White … Hospital  Married  HS dipl… Master'… 2000-…
+    ##  9  2018 Janua… Thurs…    37 White … Hospital  Married  9th-12t… college… 2500-…
+    ## 10  2018 Janua… Friday    26 White … Hospital  Married  Master'… Bachelo… 2000-…
     ## # … with 3,801,524 more rows
 
-``` r
-# Histogram  showing the age distribution
-
-fig1 <- ggplot(data = main_table) +
-  geom_bar(mapping = aes(x = age, fill = "#C5351B"))
-          
-          
-fig1 + labs(title = "Distribution of Mother's Age",
-          x = "Age of Mother",
-          y = "Frequency (Number of People)",
-          caption = "(based on data from the CDC's National Center for Health Statistics)"
-          ) 
-```
-
-![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
-
-``` r
-# Histogram showing the racial distribution
-
-fig2 <- ggplot(data = main_table) +
-  geom_bar(mapping = aes(x = race, fill = "#C5351B"))
-
-fig2 + labs(title = "Distribution of Mother's Race", 
-            x = "Race of Mother",
-            y = "Frequency (Number of People)",
-            caption = "(based on data from the CDC's National Center for Health Statistics)"
-            )
-```
-
-![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
-
-``` r
-# Histogram showing the marital status distribution of mothers
-
-fig3 <- ggplot(data = main_table) +
-  geom_bar(mapping = aes(x = mstatus, fill = "#C5351B"))
-
-fig3 + labs(tite = "Marital Status of Mother",
-            x = "Marital Status",
-            y= "Frequenct (Number of people)",
-            caption  = "(based on data from the CDC's National Center for Health Statistics")
-```
-
-![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
+![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-4.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-5.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-6.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-7.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-8.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-9.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-10.png)<!-- -->
 
 ## Discussion
 
