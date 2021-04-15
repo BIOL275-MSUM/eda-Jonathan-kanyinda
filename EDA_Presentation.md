@@ -1,8 +1,12 @@
-Investigation of Different Causes of Infant Mortality in the United
-States
-================
-Jonathan Kanyinda
-03/13/2021
+
+<img src="https://www2.mnstate.edu/uploadedImages/Content/Marketing/logos/MSUM_Signature_Vert_Color.jpg" alt="MSUM logo" width="200" style="float:right">
+
+# Investigation of Different Causes of Infant Mortality in the United States
+
+Jonathan Kanyinda and Christopher Merkord
+
+Biosciences Department, Minnesota State University Moorhead, 1104 7th
+Avenue South, Moorhead, MN 56563 USA
 
 ## Abstract
 
@@ -22,6 +26,35 @@ analysis to investigate the relation between race, gestational age and
 state of residence with infant mortality
 
 ## Introduction
+
+Infant mortality is the death of children under the age of one year.
+This topic is often overlooked because it is believed that women get
+pregnant, give birth, children grow to become men and women. However,
+this is not always the case, there are multiple cases of infant deaths
+recored in the United States and reported to the Center for Disease
+Control and prevention’s National Center for Health Statistics and made
+available online (Data Access - Vital Statistics Online 2020), where
+over 3 million cases have been reported for the United States alone in
+the year. I believe that getting more understanding on the different
+causes of infant death is the first step in preventing it as it will
+provide us with specific areas to explore and improve. Prevention can
+only be applied when there is knowledge of the risks and causes and one
+way to ensure a good prevention in any area is by educating people on
+the specific and or various subjects. Education tends to be overlooked
+when it comes to some situation, but even the general knowledge on a
+topic is better than the absence of any knowledge. By investigating the
+different outcomes and education levels, not only helps in avoiding
+assumptions, but it mainly provides valuable information about the ratio
+between the different education levels and therefore provide a starting
+point for improvement of both the education system and the provision of
+ways to keep children in schools as well as for the other various
+probable causes. This report presents infant mortality statistics based
+on the data from the 2018 period linked birth/infant death file. Infant
+mortality is described by maternal race, maternal age, marital status,
+education level, month, day and place of birth. This study has been made
+using collected data in the year 2018 of children under the age of 1 who
+had died. (Data Access - Vital Statistics Online 2020). This was done in
+the goal to further investigate the various causes of infant death.
 
 ## Methods
 
@@ -61,71 +94,91 @@ function combined with the combine function (c()) from the base package
 
 Table 1
 
-    ## # A tibble: 3,801,534 x 10
-    ##     year month   day   age  race place mstatus meduc feduc weight
-    ##    <dbl> <chr> <dbl> <dbl> <dbl> <dbl>   <dbl> <dbl> <dbl> <chr> 
-    ##  1  2018 01        2    30     1     1       1     6     3 08    
-    ##  2  2018 01        2    35     3     1       2     9     4 07    
-    ##  3  2018 01        2    28     1     1       1     6     4 07    
-    ##  4  2018 01        2    23     3     1       2     2     2 07    
-    ##  5  2018 01        3    37     1     1       1     4     3 05    
-    ##  6  2018 01        2    26     1     2       1     6     6 09    
-    ##  7  2018 01        3    28     1     1       1     4     6 07    
-    ##  8  2018 01        4    31     1     1       1     3     7 07    
-    ##  9  2018 01        5    37     1     1       1     2     4 08    
-    ## 10  2018 01        6    26     1     1       1     7     6 07    
-    ## # … with 3,801,524 more rows
+![](EDA_Presentation_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
-    ## [1] Sunday    Monday    Tuesday   Wednesday Thursday  Friday    Saturday 
-    ## Levels: Sunday Monday Tuesday Wednesday Thursday Friday Saturday
+*Figure 1. Infant Mortality recorded by maternal age: United States
+2017-2018*
 
-    ## [1] White (only)       Black (only)       AIAN (only)        Asian (only)      
-    ## [5] NHOPI              More than one race
-    ## 6 Levels: White (only) Black (only) AIAN (only) Asian (only) ... More than one race
+![](EDA_Presentation_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
-    ## [1] Married   Unmarried
-    ## Levels: Married Unmarried
+*Figure 2. Infant mortality recorded by maternal race: United States
+2017-2018*
 
-    ## [1] Hospital                   Free standing birth center
-    ## [3] Home (intended)            Home,unintended0          
-    ## [5] Home (unknown)             clinic/doctor's office    
-    ## [7] Other                      Unknown                   
-    ## 8 Levels: Hospital Free standing birth center ... Unknown
+![](EDA_Presentation_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
-    ## [1] 1st-8th grade             9th-12th grade/no diploma
-    ## [3] HS diploma                college credit/no degree 
-    ## [5] A.degree                  Bachelor's degree        
-    ## [7] Master's degree           Doctorate                
-    ## [9] Unknown                  
-    ## 9 Levels: 1st-8th grade 9th-12th grade/no diploma ... Unknown
+*Figure 3. Infant mortality recorded by marital Status: united States
+2017-2018*
 
-    ##  [1] January   February  March     April     May       June      July     
-    ##  [8] August    September October   November  December 
-    ## 12 Levels: January February March April May June July August ... December
+![](EDA_Presentation_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-    ##  [1] 227-449    500-749    750-999    1000-1249  1250,1499  1500,1999 
-    ##  [7] 2000-2499  2500-2999  3000-3499  3500-3999  4000-4499  4500-4999 
-    ## [13] 5000-8167  Not Stated
-    ## 14 Levels: 227-449 500-749 750-999 1000-1249 1250,1499 1500,1999 ... Not Stated
+*Figure 4. Infant mortality recorded by education level of mothers:
+United States 2017-2018*
 
-    ## # A tibble: 3,801,534 x 10
-    ##     year month  day      age race    place     mstatus  meduc    feduc    weight
-    ##    <int> <fct>  <fct>  <dbl> <fct>   <fct>     <fct>    <fct>    <fct>    <fct> 
-    ##  1  2018 Janua… Monday    30 White … Hospital  Married  Bachelo… HS dipl… 2500-…
-    ##  2  2018 Janua… Monday    35 AIAN (… Hospital  Unmarri… Unknown  college… 2000-…
-    ##  3  2018 Janua… Monday    28 White … Hospital  Married  Bachelo… college… 2000-…
-    ##  4  2018 Janua… Monday    23 AIAN (… Hospital  Unmarri… 9th-12t… 9th-12t… 2000-…
-    ##  5  2018 Janua… Tuesd…    37 White … Hospital  Married  college… HS dipl… 1250,…
-    ##  6  2018 Janua… Monday    26 White … Free sta… Married  Bachelo… Bachelo… 3000-…
-    ##  7  2018 Janua… Tuesd…    28 White … Hospital  Married  college… Bachelo… 2000-…
-    ##  8  2018 Janua… Wedne…    31 White … Hospital  Married  HS dipl… Master'… 2000-…
-    ##  9  2018 Janua… Thurs…    37 White … Hospital  Married  9th-12t… college… 2500-…
-    ## 10  2018 Janua… Friday    26 White … Hospital  Married  Master'… Bachelo… 2000-…
-    ## # … with 3,801,524 more rows
+![](EDA_Presentation_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
-![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-4.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-5.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-6.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-7.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-8.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-9.png)<!-- -->![](EDA_Presentation_files/figure-gfm/unnamed-chunk-2-10.png)<!-- -->
+*Figure 5. Infant mortality recorded by education level of fathers:
+United States 2017-2018*
+
+![](EDA_Presentation_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+*Figure 6. Infant mortality recorded by place of birth: United States
+2017-2018*
+
+![Figure 7. Infant mortality recorded by days of birt: United States
+2017-2018](EDA_Presentation_files/figure-gfm/unnamed-chunk-9-1.png)
+
+*Figure 7. Infant mortality recorded by days of birth: United States
+2017-2018*
+
+![](EDA_Presentation_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+*Figure 8. infant mortality recorded by days of birth: United States
+2017-2018*
+
+![](EDA_Presentation_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+*Figure 9. Infant mortality recorded by year of birth: United States
+2017-2018*
+
+![](EDA_Presentation_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+*Figure 10. infant mortality recorded by weight of children at birth:
+United States 2017-2018*
 
 ## Discussion
+
+This data is reliable as it was collected based on informations provided
+on birth certificates and makes it possible to study the causes of death
+in different regions, populations, races and even the different social
+statuses of people. In this Exploratory data analysis, the data provides
+a correlation between certain social and biological states based on the
+linked birth/infant mortality from the year 2018 published by the CDC’s
+NHS. Based on the different aspects investigated, there had been more
+cases in the most prevalent groups of individuals (e.g., whites (only))
+this is because of the ratio in comparison to the other races (Figure
+2). The average age of mothers giving birth is mostly common across the
+entire population (Figure 1) and thus there is a higher record number of
+infant deaths in that age range. And most birth have been given in
+hospitals (Figure 6) implying the assistance of a trained personnel and
+also most of the recorded birth were given by married people (Figure 3)
+with babies of an average weigh of around 2000-2500 grams (Figure 10).
+There is a consistent pattern in the days of birth (Figure 7) and Month
+of birth (Figure 8) From the education level perspective, it is
+noticeable that most infant deaths occurred in parents with lower
+education levels (Figure 5). The level of education is usually
+indicative of the lifestyle and the lower education levels usually
+result in less stable living situations and these could have negative
+effects on the pregnancies leading to infant death and justifying the
+lower infant death rate in hypothetically more stable lifestyles of more
+educated people. Out of all the trends observed, the most obvious is the
+education level as that can be related to the lifestyle and thus explain
+the not always adequate condition for pregnancy care, either financially
+and or having the knowledge of dispositions to take to ensure a good
+pregnancy period.Therefore after investigating the exact ways in which
+education and other factors play a role, the next steps could be to
+develop ways to provide the general public with needed/required
+information and provide them with knowledge and access to the different
+resources available to them.
 
 ## Litterature Cited
 

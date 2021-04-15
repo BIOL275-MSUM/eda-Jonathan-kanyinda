@@ -124,7 +124,7 @@ main_table # print main table of selected data
 # Histogram  showing the age distribution
 
 fig1 <- ggplot(data = main_table) +
-  geom_bar(mapping = aes(x = age, fill = "#C5351B"))
+  geom_bar(mapping = aes(x = age), fill = "#C5351B")
           
           
 fig1 + labs(title = "Distribution of Mother's Age",
@@ -253,18 +253,19 @@ fig9 + labs(title = "Year of Birth",
 
 # Histogram showing the distribution of children weight at birth
 
+
 fig10 <-  ggplot(data = main_table) +
   geom_bar(mapping = aes(x = weight  ), fill = "#C5351B")
 
 fig10 + labs(title = "Children's Weight at Birth",
-            x = "Weight (in grams)",
-            y = "Frequency (Numer of people)",
-            caption = "(based on data from the CDC's National Center for Health Statistics)"
+             x = "Weight (in grams)",
+             y = "Frequency (Numer of people)",
+             caption = "(based on data from the CDC's National Center for Health Statistics)"
 ) + 
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1)
     
-  )
+  ) 
 
 
   
