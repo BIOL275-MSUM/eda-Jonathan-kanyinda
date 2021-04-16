@@ -25,6 +25,8 @@ rate has been trending down since 1995. I will do an exploratory
 analysis to investigate the relation between race, gestational age and
 state of residence with infant mortality
 
+![](image/cvr.png)
+
 ## Introduction
 
 Infant mortality is the death of children under the age of one year.
