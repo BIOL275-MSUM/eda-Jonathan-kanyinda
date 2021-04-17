@@ -22,9 +22,9 @@ Biosciences Department, Minnesota State University Moorhead, 1104 7th Avenue Sou
 
 Infant mortality in the United States is one of the less discussed topics in general. However, it affects a lot of families and communities in the country. In this report, infant mortality based on the data from the year 2018 by age, maternal race, gestational age and maternal state of residence have been investigated. Descriptive tabulations as well as graphs are reported and interpreted for infant death mortality using the 2018 period linked birth/infant datafile that is based on birth and death certificates registered in all states and the district of Columbia. More than 20,000 infant deaths were reported in 2018. The infant mortality rate declined by 4 % in comparison to 2017, and regardless of the differences investigated, in general the mortality rate has been trending down since 1995. I will do an exploratory analysis to investigate the relation between race, gestational age and state of residence with infant mortality
 
-![](image/cvr.png)
 
 
+<img src="image/cvr.png" width="500">
 
 
 

@@ -25,7 +25,7 @@ rate has been trending down since 1995. I will do an exploratory
 analysis to investigate the relation between race, gestational age and
 state of residence with infant mortality
 
-![](image/cvr.png)
+<img src="image/cvr.png" width="500">
 
 ## Introduction
 
