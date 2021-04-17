@@ -27,6 +27,8 @@ state of residence with infant mortality
 
 <img src="image/cvr.png" width="500">
 
+*Source: Norton’s Children*
+
 ## Introduction
 
 Infant mortality is the death of children under the age of one year.
@@ -93,8 +95,6 @@ function combined with the combine function (c()) from the base package
 (main\_table).
 
 ## Results
-
-Table 1
 
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 

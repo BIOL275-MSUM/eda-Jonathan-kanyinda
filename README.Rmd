@@ -26,7 +26,7 @@ Infant mortality in the United States is one of the less discussed topics in gen
 
 <img src="image/cvr.png" width="500">
 
-
+*Source: Norton's Children*
 
 ## Introduction
 
@@ -60,7 +60,7 @@ library(tidyverse)          # Load the tidyverse package
 
 ## Results
 
-Table 1
+
 
 ```{r}
 table1 <- read_fwf("Data/Nat2018PublicUS.c20190509.r20190717.txt",
